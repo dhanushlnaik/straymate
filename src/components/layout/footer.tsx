@@ -13,14 +13,14 @@ const Links = [
 ];
 const social = [
   {
-    link: "https://www.instagram.com/csinmamit",
+    link: "https://www.instagram.com/dhanushlnaik",
     icon: (
       <InstagramLogoIcon className="duration-200 hover:scale-125 hover:text-pink-500" />
     ),
     name: "Instagram",
   },
   {
-    link: "https://twitter.com/csinmamit",
+    link: "https://twitter.com/dhanushlnaik",
     icon: (
       <TwitterLogoIcon className="duration-200 hover:scale-125 hover:text-pink-500" />
     ),
