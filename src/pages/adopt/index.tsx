@@ -3,8 +3,8 @@ import MaxWidthWrapper from "~/components/layout/max-width-wrapper";
 import localFont from "next/font/local";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Fade } from "react-awesome-reveal";
+import EventPage from "~/components/posts/event-layout";
 const myFont = localFont({ src: "../../pages/obscura.otf" });
-
 export default function Adopt() {
   return (
     <>
@@ -32,9 +32,9 @@ export default function Adopt() {
                     <TabsTrigger value="cats">Cats</TabsTrigger>
                     <TabsTrigger value="others">Other</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="dogs">Dogs</TabsContent>
-                  <TabsContent value="cats">Cats</TabsContent>
-                  <TabsContent value="others">Others</TabsContent>
+                  <TabsContent value="dogs"><EventPage/></TabsContent>
+                  <TabsContent value="cats"><EventPage/></TabsContent>
+                  <TabsContent value="others"><EventPage/></TabsContent>
                 </Tabs>
               </MaxWidthWrapper>
             </div>

@@ -6,7 +6,8 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { Navbar } from "~/components/layout/navbar";
 import Footer from "~/components/layout/footer";
-
+import { Toaster } from "~/components/ui/toaster";
+import AddPost from "~/components/posts/add-post";
 const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -23,6 +24,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <Navbar />
         <Component {...pageProps} />
         <Footer />
+        <Toaster />
+          <div className="sticky bottom-5 w-full md:justify-end justify-center flex pr-5 z-50">
+            <AddPost />
+          </div>
       </main>
     </SessionProvider>
   );

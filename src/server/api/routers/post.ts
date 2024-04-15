@@ -2,9 +2,15 @@ import { z } from "zod";
 
 import {
   createTRPCRouter,
-  protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
+
+
+enum Category {
+  CATS = "CATS",
+  DOGS = "DOGS",
+  OTHERS = "OTHERS"
+}
 
 export const postRouter = createTRPCRouter({
   hello: publicProcedure
@@ -14,6 +20,34 @@ export const postRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
+    postanimal: publicProcedure
+    .input(z.object({
+      potid: z.string(),
+      category: z.enum([Category.CATS, Category.DOGS, Category.OTHERS]),
+      name: z.string(),
+      description: z.string(),
+      image: z.string(),
+      address: z.string()
+    }))
+    .mutation(async ({ ctx, input }) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const user = ctx.session?.user;
+      return ctx.db.post.create({
+        data: {
+          category: input.category,
+          name: input.name,
+          description: input.description,
+          image: input.image,
+          userId: user?.id.toString() ?? '',
+          address: input.address,
+        }
+      });
+    }),
+    getanimal: publicProcedure
+    .query(async ({ ctx }) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return ctx.db.post.findMany()
+    })
 
   // create: protectedProcedure
   //   .input(z.object({ name: z.string().min(1) }))
@@ -35,8 +69,4 @@ export const postRouter = createTRPCRouter({
   //     where: { createdBy: { id: ctx.session.user.id } },
   //   });
   // }),
-
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
 });
