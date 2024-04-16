@@ -32,9 +32,15 @@ export default function Adopt() {
                     <TabsTrigger value="cats">Cats</TabsTrigger>
                     <TabsTrigger value="others">Other</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="dogs"><EventPage/></TabsContent>
-                  <TabsContent value="cats"><EventPage/></TabsContent>
-                  <TabsContent value="others"><EventPage/></TabsContent>
+                  <TabsContent value="dogs">
+                    <EventPage />
+                  </TabsContent>
+                  <TabsContent value="cats">
+                    <EventPage />
+                  </TabsContent>
+                  <TabsContent value="others">
+                    <EventPage />
+                  </TabsContent>
                 </Tabs>
               </MaxWidthWrapper>
             </div>

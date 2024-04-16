@@ -25,18 +25,9 @@ enum Category {
 }
 import { api } from "~/utils/api";
 const pets = [Category.CATS, Category.DOGS, Category.OTHERS];
-import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "~/lib/firebase";
 import { toast } from "sonner";
-
-const isFileUrl = (value: string) => {
-  // You can customize this logic based on how you identify a file URL
-  return value.startsWith("file://");
-};
 
 const formSchema = z.object({
   potid: z.string(),
@@ -62,7 +53,7 @@ export default function AddPost() {
       setImage(file);
     }
   };
-  const trackingid:string = uuidv4();
+  const trackingid: string = uuidv4();
 
   const uploadImageToStorage = async (file: File): Promise<string> => {
     const imageRef = ref(storage, "animals/" + file.name);
@@ -110,22 +101,20 @@ export default function AddPost() {
         toast("Image Updated", {
           description: `${values.name} entry created in the database.`,
         });
-
       }
 
-      postDa.mutate({
+      await postDa.mutateAsync({
         name: values.name,
         category: values.category,
         description: values.description,
         image: values.image,
         address: values.address,
-        potid : trackingid
+        potid: trackingid,
       });
-          
-      console.log("Form submitted successfully", values);
 
+      console.log("Form submitted successfully", values);
+      setAddEventOpen();
       console.log("Done", values);
-      
     } catch (error) {
       console.error("Error creating team:", error);
     } finally {
@@ -138,7 +127,7 @@ export default function AddPost() {
       {user && (
         <>
           <span
-            className={`flex w-fit cursor-pointer items-center justify-center space-x-4 rounded-full bg-black p-4 text-lg text-white sm:text-xl md:px-4 md:py-2 md:text-2xl`}
+            className={`flex w-fit cursor-pointer items-center justify-center space-x-4 rounded-full bg-pink-600 p-4 text-lg text-white sm:text-xl md:px-4 md:py-2 md:text-2xl`}
             onClick={() => {
               setAddEventOpen();
             }}
@@ -147,7 +136,7 @@ export default function AddPost() {
           </span>
 
           {addEventOpen && (
-            <div className="fixed inset-0 z-50 bg-black/80">
+            <div className="fixed inset-0 z-50 bg-pink-600/80">
               <div className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 rounded-md border bg-white p-4">
                 <span
                   className="text-lightGray border-darkGray absolute right-4 top-4 cursor-pointer rounded-md p-[0.1rem] duration-300 hover:border"
@@ -185,6 +174,24 @@ export default function AddPost() {
                             </FormItem>
                           )}
                         />
+                        <FormField
+                          control={form.control}
+                          name="description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Description</FormLabel>
+                              <FormControl>
+                                <Textarea
+                                  placeholder="Tell us a little bit about yourself"
+                                  className="resize-none"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
                         <FormField
                           control={form.control}
                           name="address"
@@ -228,31 +235,31 @@ export default function AddPost() {
                           )}
                         />
 
-<FormField
-              control={form.control}
-              name="image" // Update the name attribute to match the form schema
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Upload Image</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                        <FormField
+                          control={form.control}
+                          name="image" // Update the name attribute to match the form schema
+                          render={() => (
+                            <FormItem>
+                              <FormLabel>Upload Image</FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={handleImageChange}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
 
-            <Button
-              type="submit"
-              style={{ padding: "10px" }}
-              disabled={uploading}
-            >
-              {uploading ? "Uploading..." : "Submit"}
-            </Button>
+                        <Button
+                          type="submit"
+                          style={{ padding: "10px" }}
+                          disabled={uploading}
+                        >
+                          {uploading ? "Uploading..." : "Submit"}
+                        </Button>
                       </form>
                     </Form>
                   </div>

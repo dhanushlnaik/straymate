@@ -1,7 +1,6 @@
 "use client";
 
 import { Badge } from "~/components/ui/badge";
-import { ThumbsDown } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -9,7 +8,6 @@ import {
   CardHeader,
 } from "~/components/ui/card";
 import Image from "next/image";
-import { useToast } from "../ui/use-toast";
 
 interface CardProps {
   category: string;
@@ -74,8 +72,6 @@ const EventCard: React.FC<CardProps> = ({
                     : createdAt.getMinutes()}
               </span>
             </div>
-
-
           </div>
         </div>
       </CardFooter>

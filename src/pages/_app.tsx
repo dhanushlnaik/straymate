@@ -25,9 +25,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <Component {...pageProps} />
         <Footer />
         <Toaster />
-          <div className="sticky bottom-5 w-full md:justify-end justify-center flex pr-5 z-50">
-            <AddPost />
-          </div>
+        <div className="sticky bottom-5 z-50 flex w-full justify-center pr-5 md:justify-end">
+          <AddPost />
+        </div>
       </main>
     </SessionProvider>
   );

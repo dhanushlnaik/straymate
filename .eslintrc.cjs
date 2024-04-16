@@ -6,10 +6,10 @@ const config = {
   },
   overrides: [
     {
-      "files": ["*.ts", "*.tsx"],
-      "parser": "@typescript-eslint/parser"
-      }
-    ],
+      files: ["*.ts", "*.tsx"],
+      parser: "@typescript-eslint/parser",
+    },
+  ],
   plugins: ["@typescript-eslint"],
   extends: [
     "next/core-web-vitals",
