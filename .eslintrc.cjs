@@ -4,6 +4,12 @@ const config = {
   parserOptions: {
     project: true,
   },
+  overrides: [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser"
+      }
+    ],
   plugins: ["@typescript-eslint"],
   extends: [
     "next/core-web-vitals",
