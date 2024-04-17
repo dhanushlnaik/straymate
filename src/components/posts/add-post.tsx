@@ -101,16 +101,17 @@ export default function AddPost() {
         toast("Image Updated", {
           description: `${values.name} entry created in the database.`,
         });
+        await postDa.mutateAsync({
+          name: values.name,
+          category: values.category,
+          description: values.description,
+          image: imageUrl,
+          address: values.address,
+          potid: trackingid,
+        });
       }
 
-      await postDa.mutateAsync({
-        name: values.name,
-        category: values.category,
-        description: values.description,
-        image: values.image,
-        address: values.address,
-        potid: trackingid,
-      });
+
 
       console.log("Form submitted successfully", values);
       setAddEventOpen();

@@ -41,9 +41,11 @@ export const postRouter = createTRPCRouter({
         },
       });
     }),
-  getanimal: publicProcedure.query(async ({ ctx }) => {
+  getanimal: publicProcedure
+  .input(z.object({cat : z.enum([Category.CATS, Category.OTHERS, Category.DOGS])}))
+  .query(async ({ ctx, input }) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    return ctx.db.post.findMany();
+    return ctx.db.post.findMany({where : {category : input.cat}});
   }),
 
   // create: protectedProcedure

@@ -27,24 +27,7 @@ export function Navbar() {
               >
                 Home
               </Link>
-              <Link
-                href="/events"
-                className={buttonVariants({
-                  variant: "ghost",
-                  size: "sm",
-                })}
-              >
-                About Us
-              </Link>
-              <Link
-                href="/team"
-                className={buttonVariants({
-                  variant: "ghost",
-                  size: "sm",
-                })}
-              >
-                Contact Us
-              </Link>
+
               <Link
                 href="/team"
                 className={buttonVariants({

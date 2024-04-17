@@ -28,9 +28,6 @@ const EventCard: React.FC<CardProps> = ({
     <Card className="flex h-full max-w-[30rem] flex-col justify-between duration-300 hover:scale-105">
       <CardHeader className="space-y-4">
         <div className="flex w-full items-center justify-between">
-          <span className="flex flex-col items-center gap-2 text-sm md:flex-row">
-            {author}
-          </span>
           <Badge variant={"destructive"}>{category.replaceAll("_", " ")}</Badge>
         </div>
         <Image

@@ -6,6 +6,7 @@ import { Fade } from "react-awesome-reveal";
 import EventPage from "~/components/posts/event-layout";
 const myFont = localFont({ src: "../../pages/obscura.otf" });
 export default function Adopt() {
+
   return (
     <>
       <Head>
@@ -33,13 +34,13 @@ export default function Adopt() {
                     <TabsTrigger value="others">Other</TabsTrigger>
                   </TabsList>
                   <TabsContent value="dogs">
-                    <EventPage />
+                    <EventPage cat="DOGS" />
                   </TabsContent>
                   <TabsContent value="cats">
-                    <EventPage />
+                    <EventPage cat="CATS" />
                   </TabsContent>
                   <TabsContent value="others">
-                    <EventPage />
+                    <EventPage cat="OTHERS" />
                   </TabsContent>
                 </Tabs>
               </MaxWidthWrapper>

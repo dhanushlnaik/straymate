@@ -1,8 +1,20 @@
 "use client";
 import { api } from "~/utils/api";
 import EventCard from "./event-cards";
-const EventPage = () => {
-  const posts = api.post.getanimal.useQuery();
+
+interface Event {
+  cat :string;
+}
+
+enum Category {
+  CATS = "CATS",
+  DOGS = "DOGS",
+  OTHERS = "OTHERS",
+}
+
+const EventPage:React.FC<Event> = ({cat}) => {
+  const category: Category = Category[cat as keyof typeof Category];
+  const posts = api.post.getanimal.useQuery({cat: category});
 
   return (
     <>
